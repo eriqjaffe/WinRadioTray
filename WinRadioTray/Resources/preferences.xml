@@ -1,0 +1,12 @@
+<preferences>
+  <autoplay>false</autoplay>
+  <logging>true</logging>
+  <mmkeys>true</mmkeys>
+  <stationswitcher>true</stationswitcher>
+  <sleeptimer>false</sleeptimer>
+  <sleeptimerduration>60</sleeptimerduration>
+  <balance>0</balance>
+  <volume>50</volume>
+  <lastURL></lastURL>
+  <lastStation></lastStation>
+</preferences>
