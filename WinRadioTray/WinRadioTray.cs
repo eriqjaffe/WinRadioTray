@@ -428,7 +428,10 @@ namespace WinRadioTray
             }
             else
             {
-                hooker.Unhook();
+                if (hooker.IsHooked) 
+                {
+                    hooker.Unhook();
+                }
             }
 
             XmlDocument prefs = new XmlDocument();
