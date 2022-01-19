@@ -200,6 +200,9 @@ namespace WinRadioTray
                         case "BASS_DEVICE_TYPE_HEADPHONES":
                             tmpOutput.Image = Properties.Resources.icons8_headphones;
                             break;
+                        default:
+                            tmpOutput.Image = Properties.Resources.icons8_speaker;
+                            break;
                     }
                     outputs.DropDownItems.Add(tmpOutput);
                     
