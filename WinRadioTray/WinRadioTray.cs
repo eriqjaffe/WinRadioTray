@@ -79,6 +79,7 @@ namespace WinRadioTray
         private ToolStripMenuItem resetVolume;
         private ToolStripMenuItem stationSwitcher;
         private ToolStripMenuItem stop;
+        private ToolStripMenuItem outputs;
         public Boolean stationSwitcherActive = false;
         public int sleepTimerDuration;
         public int stream;
@@ -165,6 +166,46 @@ namespace WinRadioTray
 
             audioSettings = new ToolStripMenuItem("Audio Settings");
             audioSettings.Image = Properties.Resources.icons8_audio_wave;
+
+            outputs = new ToolStripMenuItem("Audio Output");
+            BASS_DEVICEINFO info = new BASS_DEVICEINFO();
+            for (int n = 0; Bass.BASS_GetDeviceInfo(n, info); n++)
+            {
+                if (Bass.BASS_Init(n, 44100, BASSInit.BASS_DEVICE_DEFAULT, this.Handle))
+                {
+                    _aacPlugIn = Bass.BASS_PluginLoad("bass_aac.dll");
+                    _alacPlugin = Bass.BASS_PluginLoad("bassalac.dll");
+                    _dsdPlugin = Bass.BASS_PluginLoad("bassdsd.dll");
+                    _flacPlugin = Bass.BASS_PluginLoad("bassflac.dll");
+                    _hlsPlugin = Bass.BASS_PluginLoad("basshls.dll");
+                    _opusPlugin = Bass.BASS_PluginLoad("bassopus.dll");
+                    _wmaPlugin = Bass.BASS_PluginLoad("basswma.dll");
+                    _wvPlugin = Bass.BASS_PluginLoad("basswv.dll");
+                }
+                else
+                {
+                    MessageBox.Show(this, "Bass_Init error!");
+                }
+                Console.WriteLine(info.ToString());
+                Console.WriteLine(info.type);
+                if (info.ToString() != "No sound")
+                {
+                    ToolStripMenuItem tmpOutput = new ToolStripMenuItem(info.ToString(), null, new EventHandler(OnChangeOutput));
+                    tmpOutput.Tag = n;
+                    switch (info.type.ToString())
+                    {
+                        case "BASS_DEVICE_TYPE_SPEAKERS":
+                            tmpOutput.Image = Properties.Resources.icons8_speaker;
+                            break;
+                        case "BASS_DEVICE_TYPE_HEADPHONES":
+                            tmpOutput.Image = Properties.Resources.icons8_headphones;
+                            break;
+                    }
+                    outputs.DropDownItems.Add(tmpOutput);
+                    
+                }
+            }
+            outputs.Image = Properties.Resources.icons8_speaker;
 
             logging = new ToolStripMenuItem("Log Actions");
             logging.Image = Properties.Resources.icons8_log;
@@ -289,6 +330,7 @@ namespace WinRadioTray
             trayMenu.Items.Add("-", null, null);
             trayMenu.Items.Add(preferences);
             trayMenu.Items.Add(audioSettings);
+            trayMenu.Items.Add(outputs);
             trayMenu.Items.Add(logging);
 
             custom = new ToolStripMenuItem();
@@ -896,6 +938,15 @@ namespace WinRadioTray
             ToolStripMenuItem mi = sender as ToolStripMenuItem;
             stationTitle = mi.Text;
             stationURL(mi.Tag.ToString());
+        }
+
+        protected void OnChangeOutput(object sender, EventArgs e)
+        {
+            int foo = Int32.Parse(((System.Windows.Forms.ToolStripItem)sender).Tag.ToString());
+            Console.WriteLine(foo);
+            Bass.BASS_ChannelSetDevice(stream, foo);
+            Console.WriteLine(Bass.BASS_ErrorGetCode());
+            Console.WriteLine(Bass.BASS_GetDevice());
         }
 
         protected void stationURL(string url)
