@@ -1,5 +1,5 @@
 # WinRadioTray
-A simple internet radio player that sits in the System Tray, hence the name.  It is heavily influenced by a Linux application called [Radio Tray](https://github.com/lubosz/radiotray), written by Carlos Ribiero.
+A simple internet radio player that sits in the System Tray, hence the name.  It is heavily influenced by a Linux application called [Radio Tray](https://github.com/lubosz/radiotray), originally written by Carlos Ribiero.
 
 This software makes use of the following:
 - [BASS Audio Library](http://www.un4seen.com/bass.html) for audio playback and metadata retrieval.
