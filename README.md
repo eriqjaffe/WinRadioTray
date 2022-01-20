@@ -9,4 +9,4 @@ This software makes use of the following:
 
 To the best of my knowledge, the above sources are all free software without any licensing restrictions when used for non-commercial application.
                 
-Built against Dot Net 4.5, so if you're running a recent-ish build of Windows you should already be OK there.
+Built against Dot Net 4.5, so if you're running a recent-ish build of Windows you should already be OK, although I've only tested it using Windows 7, 10, and 11.
