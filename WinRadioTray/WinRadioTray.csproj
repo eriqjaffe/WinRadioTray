@@ -149,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_radio_tower_34495e.ico" />
+    <None Include="Resources\icons8_radio_tower_idle_dark.ico" />
+    <None Include="Resources\icons8_radio_tower_dark.ico" />
     <None Include="Resources\icons8-headphones.png" />
     <None Include="Resources\icons8_headphones.bmp" />
     <None Include="Resources\logfish.txt" />

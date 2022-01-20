@@ -61,6 +61,7 @@ namespace WinRadioTray
         private ToolStripMenuItem addCustom;
         private ToolStripMenuItem audioSettings;
         private ToolStripMenuItem autoPlay;
+        private ToolStripMenuItem darkIcon;
         private ToolStripMenuItem custom;
         private ToolStripMenuItem enableAutoRun;
         private ToolStripMenuItem enableLogging;
@@ -80,6 +81,7 @@ namespace WinRadioTray
         private ToolStripMenuItem stationSwitcher;
         private ToolStripMenuItem stop;
         private ToolStripMenuItem outputs;
+        private ToolStripMenuItem gbhost;
         public Boolean stationSwitcherActive = false;
         public int sleepTimerDuration;
         public int stream;
@@ -94,7 +96,12 @@ namespace WinRadioTray
         public IntPtr _myUserAgentPtr;
         public static ContextMenuStrip trayMenu;
         public ToolStripMenuItem stations;
+        public GroupBox gb;
         private Boolean testbool;
+        public Boolean darkTheme;
+        public Icon playingImage;
+        public Icon stoppedImage;
+        
         
 
         public SysTrayApp()
@@ -186,12 +193,16 @@ namespace WinRadioTray
                 {
                     MessageBox.Show(this, "Bass_Init error!");
                 }
-                Console.WriteLine(info.ToString());
-                Console.WriteLine(info.type);
                 if (info.ToString() != "No sound")
                 {
                     ToolStripMenuItem tmpOutput = new ToolStripMenuItem(info.ToString(), null, new EventHandler(OnChangeOutput));
+                    tmpOutput.Name = info.ToString();
                     tmpOutput.Tag = n;
+                    if (info.IsDefault) {
+                        tmpOutput.Checked = true;
+                    } else { 
+                        tmpOutput.Checked = false;
+                    }
                     switch (info.type.ToString())
                     {
                         case "BASS_DEVICE_TYPE_SPEAKERS":
@@ -250,6 +261,29 @@ namespace WinRadioTray
             audioSettings.DropDownItems.Add(resetBalance);
 
             trayMenu = new ContextMenuStrip();
+
+            darkIcon = new ToolStripMenuItem("Dark system tray icon", null, toggleDarkIcon);
+            if (prefsRoot.SelectSingleNode("darkicon") != null)
+            {
+                darkIcon.Checked = prefsRoot["darkicon"].InnerText == "true" ? true : false;
+                darkTheme = prefsRoot["darkicon"].InnerText == "true" ? true : false;
+                if (darkTheme)
+                {
+                    playingImage = Properties.Resources.icons8_radio_tower_dark;
+                    stoppedImage = Properties.Resources.icons8_radio_tower_idle_dark;
+                } else
+                {
+                    playingImage = Properties.Resources.icons8_radio_tower1;
+                    stoppedImage = Properties.Resources.icons8_radio_tower_idle;
+                }
+            }
+            else
+            {
+                darkIcon.Checked = false;
+                darkTheme = false;
+                playingImage = Properties.Resources.icons8_radio_tower1;
+                stoppedImage = Properties.Resources.icons8_radio_tower_idle;
+            }
 
             autoPlay = new ToolStripMenuItem("Auto play last station on startup", null, toggleAutoPlay);
             if (prefsRoot.SelectSingleNode("autoplay") != null)
@@ -321,6 +355,7 @@ namespace WinRadioTray
             sleepTimerCtl.Label2.BackColor = back;
             sleepTimerCtl.NumericUpDown.BackColor = back;
 
+            preferences.DropDownItems.Add(darkIcon);
             preferences.DropDownItems.Add(autoPlay);
             preferences.DropDownItems.Add(enableLogging);
             preferences.DropDownItems.Add(enableMMKeys);
@@ -329,12 +364,28 @@ namespace WinRadioTray
             preferences.DropDownItems.Add(enableSleepTimer);
             preferences.DropDownItems.Add(sleepTimerCtl);
 
+            gb = new GroupBox();
+            RadioButton rb1 = new RadioButton();
+            rb1.Text = "Radio Button 1";
+            RadioButton rb2 = new RadioButton();
+            rb2.Text = "Radio Button 2";
+            gb.Controls.Add(rb1);
+            gb.Controls.Add(rb2);
+            ToolStripControlHost tsHost = new ToolStripControlHost(rb1);
+            tsHost.Text = "Group Box";
+
+            gbhost = new ToolStripMenuItem("group box host");
+            gbhost.Image = Properties.Resources.icons8_speaker;
+            gbhost.DropDownItems.Add(tsHost);
+            
+
             trayMenu.Items.Add(stations);
             trayMenu.Items.Add("-", null, null);
             trayMenu.Items.Add(preferences);
             trayMenu.Items.Add(audioSettings);
             trayMenu.Items.Add(outputs);
             trayMenu.Items.Add(logging);
+            //trayMenu.Items.Add(gbhost);
 
             custom = new ToolStripMenuItem();
             custom.Text = "Play Custom URL";
@@ -414,7 +465,8 @@ namespace WinRadioTray
 
             trayIcon = new NotifyIcon();
             Fixes.Fixes.SetNotifyIconText(trayIcon, GetTooltipText("WinRadioTray"));
-            trayIcon.Icon = Properties.Resources.icons8_radio_tower_idle;
+            //trayIcon.Icon = stoppedImage;
+            trayIcon.Icon = stoppedImage;
             trayIcon.ContextMenuStrip = trayMenu;
             trayIcon.Visible = true;
             trayIcon.MouseUp += trayIcon_MouseUp;
@@ -539,7 +591,7 @@ namespace WinRadioTray
                 }
                 Bass.BASS_ChannelPlay(stream, true);
                 Fixes.Fixes.SetNotifyIconText(trayIcon, GetTooltipText(_tagInfo.artist + "\r\n" + _tagInfo.title + "\r\n" + stationTitle));
-                trayIcon.Icon = Properties.Resources.icons8_radio_tower1;
+                trayIcon.Icon = playingImage;
             }
             play.Visible = false;
             pause.Visible = true;
@@ -556,7 +608,7 @@ namespace WinRadioTray
             }
             Bass.BASS_ChannelPause(stream);
             Fixes.Fixes.SetNotifyIconText(trayIcon, stationTitle + " - PAUSED");
-            trayIcon.Icon = Properties.Resources.icons8_radio_tower_paused;
+            trayIcon.Icon = stoppedImage;
             play.Visible = true;
             pause.Visible = false;
             stop.Enabled = false;
@@ -569,7 +621,7 @@ namespace WinRadioTray
             Bass.BASS_ChannelStop(stream);
             //Bass.BASS_ChannelPause(stream);
             Fixes.Fixes.SetNotifyIconText(trayIcon, "WinRadioTray");
-            trayIcon.Icon = Properties.Resources.icons8_radio_tower_idle;
+            trayIcon.Icon = stoppedImage;
             if (timeX.Enabled == true)
             {
                 timeX.Stop();
@@ -761,6 +813,38 @@ namespace WinRadioTray
             return result;
         }
 
+        private void toggleDarkIcon(object sender, EventArgs e)
+        {
+            XmlDocument prefs = new XmlDocument();
+            prefs.Load(path + "\\preferences.xml");
+            XmlNode prefsRoot = prefs.FirstChild;
+            if (darkIcon.Checked)
+            {
+                darkIcon.Checked = false;
+                prefsRoot["darkicon"].InnerText = "false";
+                darkTheme = false;
+                playingImage = Properties.Resources.icons8_radio_tower1;
+                stoppedImage = Properties.Resources.icons8_radio_tower_idle;
+            }
+            else
+            {
+                darkIcon.Checked = true;
+                prefsRoot["darkicon"].InnerText = "true";
+                darkTheme = true;
+                playingImage = Properties.Resources.icons8_radio_tower_dark;
+                stoppedImage = Properties.Resources.icons8_radio_tower_idle_dark;
+            }
+            prefs.Save(path + "\\preferences.xml");
+            _status = Bass.BASS_ChannelIsActive(stream);
+            if (_status == BASSActive.BASS_ACTIVE_PLAYING)
+            {
+                trayIcon.Icon = playingImage;
+            } else
+            {
+                trayIcon.Icon = stoppedImage;
+            }
+        }
+
         private void toggleAutoPlay(object sender, EventArgs e)
         {
             XmlDocument prefs = new XmlDocument();
@@ -945,11 +1029,20 @@ namespace WinRadioTray
 
         protected void OnChangeOutput(object sender, EventArgs e)
         {
+            String clickedOption = (((ToolStripMenuItem)sender).Name);
+            foreach (ToolStripMenuItem item in outputs.DropDownItems)
+            {
+                if (item.Name == clickedOption)
+                {
+                    item.Checked = true;
+                } else
+                {
+                    item.Checked = false;
+                }
+            }
+            ((ToolStripMenuItem)sender).Checked = true;
             int foo = Int32.Parse(((System.Windows.Forms.ToolStripItem)sender).Tag.ToString());
-            Console.WriteLine(foo);
-            Bass.BASS_ChannelSetDevice(stream, foo);
-            Console.WriteLine(Bass.BASS_ErrorGetCode());
-            Console.WriteLine(Bass.BASS_GetDevice());
+            Bass.BASS_ChannelSetDevice(stream, foo); 
         }
 
         protected void stationURL(string url)
@@ -989,7 +1082,8 @@ namespace WinRadioTray
                 trayIcon.BalloonTipTitle = "Playback Error";
                 trayIcon.BalloonTipText = "There was a problem playing back " + stationTitle + "\r\n"+ Bass.BASS_ErrorGetCode();
                 trayIcon.ShowBalloonTip(5);
-                trayIcon.Icon = Properties.Resources.icons8_radio_tower_idle;
+                //trayIcon.Icon = stoppedImage;
+                trayIcon.Icon = stoppedImage;
                 currentURL = null;
             } else
             {
@@ -1003,7 +1097,8 @@ namespace WinRadioTray
                 {
                     timeX.Enabled = false;
                 }
-                trayIcon.Icon = Properties.Resources.icons8_radio_tower1;
+                //trayIcon.Icon = playingImage;
+                trayIcon.Icon = playingImage;
                 XmlDocument prefs = new XmlDocument();
                 prefs.Load(path + "\\preferences.xml");
                 XmlNode prefsRoot = prefs.FirstChild;
@@ -1049,7 +1144,8 @@ namespace WinRadioTray
                 Bass.BASS_ChannelStop(stream);
                 Bass.BASS_Free();
                 Fixes.Fixes.SetNotifyIconText(trayIcon, "WinRadioTray");
-                trayIcon.Icon = Properties.Resources.icons8_radio_tower_idle;
+                //trayIcon.Icon = stoppedImage;
+                trayIcon.Icon = stoppedImage;
                 timeX.Enabled = false;
                 sleepTimerDuration = Int32.Parse(sleepTimerCtl.NumericUpDown.Value.ToString());
                 stop.Enabled = false;

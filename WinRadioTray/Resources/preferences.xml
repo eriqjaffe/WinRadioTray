@@ -1,4 +1,5 @@
 <preferences>
+  <darkicon>false</darkicon>
   <autoplay>false</autoplay>
   <logging>true</logging>
   <mmkeys>true</mmkeys>

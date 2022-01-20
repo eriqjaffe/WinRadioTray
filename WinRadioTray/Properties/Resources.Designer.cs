@@ -390,9 +390,29 @@ namespace WinRadioTray.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icons8_radio_tower_dark {
+            get {
+                object obj = ResourceManager.GetObject("icons8_radio_tower_dark", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icons8_radio_tower_idle {
             get {
                 object obj = ResourceManager.GetObject("icons8_radio_tower_idle", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icons8_radio_tower_idle_dark {
+            get {
+                object obj = ResourceManager.GetObject("icons8_radio_tower_idle_dark", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
