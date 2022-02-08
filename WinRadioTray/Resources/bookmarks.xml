@@ -14,6 +14,7 @@
     <bookmark name="Classic FM" url="http://media-ice.musicradio.com/ClassicFMMP3.m3u" img="" />
     <bookmark name="KDFC" url="http://provisioning.streamtheworld.com/pls/KDFCFM.pls" img="" />
     <bookmark name="WCPE" url="http://www.ibiblio.org/wcpe/wcpe.pls" img="" />
+    <bookmark name="WFMT" url="https://wfmt.streamguys1.com/main-mp3" img="" />
   </group>
   <group name="Community" img="">
     <bookmark name="Jupiter Broadcast" url="http://jblive.fm/" img="" />
@@ -23,14 +24,19 @@
     <bookmark name="Boot Liquor" url="http://somafm.com/bootliquor.pls" img="" />
     <bookmark name="Country 108" url="http://www.country108.com/listen.pls" img="" />
   </group>
+  <group name="Hip Hop / Rap">
+    <bookmark name="Streetz 94.5" url="http://104.6.216.93:8000/Streetz" img="" />
+    <bookmark name="Hot 108" url="https://live.powerhitz.com/hot108?esPlayer&cb=925951.mp3" img="" />
+    <bookmark name="Hot 97" url="https://24283.live.streamtheworld.com/WQHTFMAAC.aac" img="" />
+    <bookmark name="DilemaRadio" url="ttps://dilemaradiolive.radioca.st/stream" img="" />
+  </group> 
   <group name="Holiday" img="">
     <bookmark name="Christmas Lounge" url="http://ice1.somafm.com:80/christmas-128-aac" img="" />
     <bookmark name="Christmas Oldies Radio" url="http://www.outpostradio.com/christmasoldies/play.m3u" img="" />
-    <bookmark name="Classic Holiday Radio" url="http://www.classicholidayradio.com/getstream.php?hiwamp" img="" />
     <bookmark name="Xmas Rocks" url="http://ice1.somafm.com:80/xmasrocks-128-aac" img="" />
   </group>
   <group name="Jazz" img="">
-    <bookmark name="KABL" url="http://184.164.135.70:2199/tunein/american.pls" img="" />
+    <bookmark name="KABL" url="https://stationplaylist.com:7104/listen.aac" img="" />
     <bookmark name="Smooth Jazz" url="http://smoothjazz.com/streams/smoothjazz_128.pls" img="" />
     <bookmark name="Sonic Universe" url="http://somafm.com/sonicuniverse.pls" img="" />
     <bookmark name="Swing Street Radio" url="http://s6.voscast.com:11312" img="" />
@@ -40,27 +46,29 @@
     <bookmark name="Top Latino Radio" url="http://online.radiodifusion.net:8020/listen.pls" img="" />
   </group>
   <group name="Old Time Radio" img="">
-    <bookmark name="AM 1710" url="http://lin2.ash.fast-serv.com:9022/listen.pls" img="" />
-    <bookmark name="WNAR" url="http://live.wnar-am.com:8500/listen.pls" img="" />
+    <bookmark name="AM 1710" url="http://radio.macinmind.com/listen.m3u" img="" />
+    <bookmark name="WNAR" url="https://ais-edge37-live365-dal02.cdnstream.com/a91284" img="" />
     <bookmark name="Yesterday USA Blue" url="http://streaming.radio.co:80/sa37b728bf/listen " img="" />
     <bookmark name="Yesterday USA Red" url="http://streaming.radio.co:80/sf5708c004/listen" img="" />
   </group>
   <group name="Oldies" img="">
     <bookmark name=".977 - 50s 60s Hits" url="http://19353.live.streamtheworld.com/977_OLDIES_SC" img="" />
-    <bookmark name="Baby Boomer Radio" url="http://173.255.138.90:8241/stream" img="" />
-    <bookmark name="Golden Years Radio" url="http://www.goldenyearsradio.net/stream/goldenyearsradio.m3u" img="" />
+    <bookmark name="Golden Years Radio" url="https://radio1.streamserver.link/radio/8060/gyr-aa" img="" />
     <bookmark name="Scott Shannon's True Oldies Channel" url="http://peta-source.live365cdn.com/b92108_128mp3" img="" />
   </group>
   <group name="Pop / Rock" img="">
-    <bookmark name="BAGeL Radio" url="http://somafm.com/bagel.pls" img="" />
-    <bookmark name="Indie Pop Rocks!" url="http://somafm.com/indiepop.pls" img="" />
+    <bookmark name="BAGeL Radio" url="https://ais-sa3.cdnstream1.com/2606_128.aac" img="" />
+    <bookmark name="Indie Pop Rocks!" url="https://somafm.com/indiepop130.pls" img="" />
     <bookmark name="KCRW" url="https://kcrw.streamguys1.com/kcrw_192k_mp3_on_air" img="" />
     <bookmark name="KEXP" url="http://live-mp3-128.kexp.org:8000/listen.pls" img="" />
+    <bookmark name="KROQ" url="https://24973.live.streamtheworld.com/KROQFMAAC_SC" img="" />
+    <bookmark name="MOD Pizza" url-="http://stream.customchannels.net/mod_pizza_96.mp3" img="" />
     <bookmark name="PopTron" url="http://somafm.com/poptron.pls" img="" />
     <bookmark name="Radio Paradise" url="http://www.radioparadise.com/musiclinks/rp_128.m3u" img="" />
+    <bookmark name="RadioNOPE" url="http://radionope-ice.streamguys1.com/live" img="" />
     <bookmark name="The Current" url="https://current.stream.publicradio.org/kcmp.mp3" img="" />
     <bookmark name="WFMU Rock 'n' Soul Ichiban" url="http://wfmu.org/wfmu_rock.pls" img="" />
-    <bookmark name="WXRT" url="http://18843.live.streamtheworld.com/WXRTFMAACHI.aac" img="" />
+    <bookmark name="WXRT" url="https://24423.live.streamtheworld.com/WXRTFMAAC_SC" img="" />
   </group>
   <group name="Techno / Electronic" img="">
     <bookmark name="Black Rock FM" url="http://somafm.com/brfm.pls" img="" />
