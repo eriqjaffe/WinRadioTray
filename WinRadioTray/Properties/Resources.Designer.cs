@@ -518,6 +518,7 @@ namespace WinRadioTray.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;preferences&gt;
+        ///  &lt;darkicon&gt;false&lt;/darkicon&gt;
         ///  &lt;autoplay&gt;false&lt;/autoplay&gt;
         ///  &lt;logging&gt;true&lt;/logging&gt;
         ///  &lt;mmkeys&gt;true&lt;/mmkeys&gt;
