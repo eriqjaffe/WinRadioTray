@@ -24,9 +24,8 @@
     <bookmark name="Boot Liquor" url="http://somafm.com/bootliquor.pls" img="" />
     <bookmark name="Country 108" url="http://www.country108.com/listen.pls" img="" />
   </group>
-  <group name="Hip Hop / Rap">
+  <group name="Hip Hop / Rap" img="">
     <bookmark name="Streetz 94.5" url="http://104.6.216.93:8000/Streetz" img="" />
-    <bookmark name="Hot 108" url="https://live.powerhitz.com/hot108?esPlayer&cb=925951.mp3" img="" />
     <bookmark name="Hot 97" url="https://24283.live.streamtheworld.com/WQHTFMAAC.aac" img="" />
     <bookmark name="DilemaRadio" url="ttps://dilemaradiolive.radioca.st/stream" img="" />
   </group> 
