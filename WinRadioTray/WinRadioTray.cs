@@ -475,7 +475,7 @@ namespace WinRadioTray
             balanceTrackBar.TrackBar.ValueChanged += OnBalanceChange;
             sleepTimerCtl.NumericUpDown.ValueChanged += ChangeSleepTimerDuration;
             volumeTrackBar.TrackBar.ValueChanged += OnVolumeChange;
-            Bass.BASS_SetVolume((float)volumeTrackBar.TrackBar.Value / 100);
+            Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, (float)volumeTrackBar.TrackBar.Value / 100);
             Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_PAN, (float)balanceTrackBar.TrackBar.Value / 100);
         }
 
@@ -679,13 +679,15 @@ namespace WinRadioTray
 
         private void OnVolumeChange(object sender, EventArgs e)
         {
-            Bass.BASS_SetVolume((float)volumeTrackBar.TrackBar.Value / 100);
+            //Bass.BASS_SetVolume((float)volumeTrackBar.TrackBar.Value / 100);
+            Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, (float)volumeTrackBar.TrackBar.Value / 100);
             volumeTrackBar.Label.Text = "Volume: " + ((float)volumeTrackBar.TrackBar.Value).ToString();      
         }
 
         private void recenterVolume(object sender, EventArgs e)
         {
-            Bass.BASS_SetVolume(50);
+            //Bass.BASS_SetVolume(50);
+            Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, (float)0.5);
             volumeTrackBar.TrackBar.Value = 50;
             volumeTrackBar.Label.Text = "Volume: 50";
         }
@@ -1042,6 +1044,8 @@ namespace WinRadioTray
             }
             ((ToolStripMenuItem)sender).Checked = true;
             int foo = Int32.Parse(((System.Windows.Forms.ToolStripItem)sender).Tag.ToString());
+            Console.WriteLine(stream);
+            Console.WriteLine(foo);
             Bass.BASS_ChannelSetDevice(stream, foo); 
         }
 
