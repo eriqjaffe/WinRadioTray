@@ -1,5 +1,5 @@
 # Project is no longer being maintained
-Development has ceased on this project - I would suggest people use my [NodeRadioTray](https://github.com/eriqjaffe/NodeRadioTray) which almost entirely duplicates the feature set of this, as well as being platform-independent and adding some additional functionality.
+Development has ceased on this project (well, really, it ceased a few years ago) - I would suggest people use my [NodeRadioTray](https://github.com/eriqjaffe/NodeRadioTray) which almost entirely duplicates the feature set of this, as well as being platform-independent and adding some additional functionality.
 
 # WinRadioTray
 A simple internet radio player that sits in the System Tray, hence the name.  It is heavily influenced by [Radio Tray](https://github.com/lubosz/radiotray), originally written by Carlos Ribiero.
