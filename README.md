@@ -1,4 +1,4 @@
-# Project is now read-only
+# Project is no longer being maintained
 Development has ceased on this project - I would suggest people use my [NodeRadioTray](https://github.com/eriqjaffe/NodeRadioTray) which almost entirely duplicates the feature set of this, as well as being platform-independent and adding some additional functionality.
 
 # WinRadioTray
